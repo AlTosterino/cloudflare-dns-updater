@@ -4,3 +4,4 @@ mypy
 autoflake
 black
 pytest
+loguru
