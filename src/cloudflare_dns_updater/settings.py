@@ -5,6 +5,4 @@ from dataclasses import dataclass
 class Settings:
     IP_API_URL = "https://api64.ipify.org?format=json"
 
-    @classmethod
-    def setup(self):
-
+    # ? Check if calling setup class method will setup loggers and other stuff

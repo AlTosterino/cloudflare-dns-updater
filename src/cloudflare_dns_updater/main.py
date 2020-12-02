@@ -1,2 +1,4 @@
+from cloudflare_dns_updater.functions import get_device_ip
+
 if __name__ == "__main__":
-    print("ENTRYPOINT")
+    get_device_ip()
