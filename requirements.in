@@ -1,0 +1,6 @@
+httpx
+isort
+mypy
+autoflake
+black
+pytest
