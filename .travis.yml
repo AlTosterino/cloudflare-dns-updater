@@ -9,7 +9,7 @@ install:
   - make sync-deps
 
 script:
-  - make tests-ci
+  - make test-ci
 
 after_success:
   - codecov
