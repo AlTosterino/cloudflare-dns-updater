@@ -3,9 +3,11 @@ language: python
 python:
   - "3.8"
 
-install:
-  - pip install pip-tools
+before_install:
+  - pip install -U pip
   - pip install codecov
+
+install:
   - make sync-deps
 
 script:
