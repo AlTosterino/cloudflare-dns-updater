@@ -3,6 +3,9 @@ language: python
 python:
   - "3.8"
 
+cache:
+  - pip
+
 before_install:
   - pip install -U pip
   - pip install pip-tools
