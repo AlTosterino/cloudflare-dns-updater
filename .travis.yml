@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - "3.8"
+
+install:
+  - pip install pip-tools
+  - pip install codecov
+  - make sync-deps
+
+script:
+  - make tests-ci
+
+after_success:
+  - codecov

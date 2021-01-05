@@ -1,0 +1,59 @@
+interactions:
+- request:
+    body: ''
+    headers:
+      accept:
+      - '*/*'
+      accept-encoding:
+      - gzip, deflate
+      connection:
+      - keep-alive
+      host:
+      - reqres.in
+      user-agent:
+      - python-httpx/0.16.1
+    method: GET
+    uri: https://reqres.in/api/users/23
+  response:
+    content: '{}'
+    headers:
+      Access-Control-Allow-Origin:
+      - '*'
+      CF-Cache-Status:
+      - EXPIRED
+      CF-RAY:
+      - 60d031c79ca64169-HAM
+      Cache-Control:
+      - max-age=14400
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '2'
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 05 Jan 2021 21:11:54 GMT
+      Etag:
+      - W/"2-vyGp6PvFo4RvsFtPoIWeCReyIC8"
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      NEL:
+      - '{"report_to":"cf-nel","max_age":604800}'
+      Report-To:
+      - '{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report?s=pUW4AXq6F81rysKneJ7PJkkwalt2Ov9ssvlw1QGRSkJOBMWpCEvm5iUjvjREKYysOq%2FqPs9%2FbE%2FH0uQq9sY3htrZ6Yr69CBJVaA%3D"}],"group":"cf-nel","max_age":604800}'
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cfduid=d5c65c65662243d4b6f215d10d10b1b621609881114; expires=Thu, 04-Feb-21
+        21:11:54 GMT; path=/; domain=.reqres.in; HttpOnly; SameSite=Lax; Secure
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 vegur
+      X-Powered-By:
+      - Express
+      cf-request-id:
+      - 0775fd70be00004169c02c5000000001
+    http_version: HTTP/1.1
+    status_code: 404
+version: 1

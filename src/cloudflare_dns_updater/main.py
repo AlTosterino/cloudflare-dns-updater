@@ -1,4 +1,5 @@
-from cloudflare_dns_updater.functions import get_device_ip
+from cloudflare_dns_updater.queries import get_device_ip
 
 if __name__ == "__main__":
-    get_device_ip()
+    # Settings.disable_logging()
+    device_ip = get_device_ip()

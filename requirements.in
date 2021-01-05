@@ -4,4 +4,6 @@ mypy
 autoflake
 black
 pytest
+pytest-cov
+pytest-vcr
 loguru
