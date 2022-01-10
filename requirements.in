@@ -1,9 +1,11 @@
 httpx
+inject
 isort
 mypy
 autoflake
 black
 pytest
+pytest-asyncio
 pytest-cov
 pytest-vcr
 loguru
