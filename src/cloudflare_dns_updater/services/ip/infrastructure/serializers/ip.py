@@ -1,7 +1,8 @@
 from typing import Any
 
 from pydantic import BaseModel, validator
-from services.ip.value_objects import IP
+
+from cloudflare_dns_updater.services.ip.value_objects import IP
 
 
 class IpifySerializer(BaseModel):

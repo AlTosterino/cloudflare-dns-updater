@@ -1,8 +1,10 @@
 import httpx
 from loguru import logger
-from services.ip.infrastructure.serializers.ip import IpifySerializer
-from services.ip.interfaces.ip import IPService
-from services.ip.value_objects import IP
+
+from cloudflare_dns_updater.services.ip.infrastructure.serializers.ip import \
+    IpifySerializer
+from cloudflare_dns_updater.services.ip.interfaces.ip import IPService
+from cloudflare_dns_updater.services.ip.value_objects import IP
 
 
 class IpifyService(IPService):

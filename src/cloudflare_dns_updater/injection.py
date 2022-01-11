@@ -1,7 +1,7 @@
 import inject
-from services.ip.infrastructure.ip import IpifyService
-from services.ip.interfaces.ip import IPService
 
+from cloudflare_dns_updater.services.ip.infrastructure.ip import IpifyService
+from cloudflare_dns_updater.services.ip.interfaces.ip import IPService
 from cloudflare_dns_updater.settings import Settings
 
 
