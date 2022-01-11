@@ -1,11 +1,13 @@
+autoflake
+black
 httpx
 inject
 isort
+loguru
 mypy
-autoflake
-black
+pydantic
 pytest
 pytest-asyncio
 pytest-cov
 pytest-vcr
-loguru
+types-setuptools

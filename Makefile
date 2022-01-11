@@ -14,7 +14,7 @@ test:
 	pytest
 
 test-ci:
-	$(PYTHON_EXEC) -m autoflake --check --recursive --ignore-init-module-imports --remove-duplicate-keys --remove-unused-variables --remove-all-unused-imports $(LINT_PATHS) > /dev/null
+	$(PYTHON_EXEC) -m autoflake --check --recursive --ignore-init-module-imports --remove-duplicate-keys --remove-unused-variables --remove-all-unused-imports $(LINT_PATHS) > /dev/null 2>&1
 	$(PYTHON_EXEC) -m isort --check-only $(LINT_PATHS)
 	$(PYTHON_EXEC) -m black --check $(LINT_PATHS)
 	$(PYTHON_EXEC) -m mypy $(APP_PATH) --ignore-missing-imports
