@@ -21,4 +21,4 @@ script:
   - make test-ci
 
 after_success:
-  - codecov
+  - codecov -t ${CODECOV_TOKEN}
