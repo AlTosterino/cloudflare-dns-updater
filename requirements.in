@@ -10,4 +10,5 @@ pytest
 pytest-asyncio
 pytest-cov
 pytest-vcr
+pytest-xdist
 types-setuptools

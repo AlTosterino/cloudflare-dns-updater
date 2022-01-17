@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+from typing import Any, Callable, Type, TypeVar, Union, cast
+
+import inject
 from pkg_resources import DistributionNotFound, get_distribution
 
 try:

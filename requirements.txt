@@ -8,6 +8,7 @@ charset-normalizer==2.0.10
 click==8.0.3
 colorama==0.4.4
 coverage[toml]==6.2
+execnet==1.9.0
 h11==0.12.0
 httpcore==0.14.4
 httpx==0.21.3
@@ -28,9 +29,11 @@ pydantic==1.9.0
 pyflakes==2.4.0
 pyparsing==3.0.6
 pytest==6.2.5
-pytest-asyncio==0.16.0
+pytest-asyncio==0.17.2
 pytest-cov==3.0.0
+pytest-forked==1.4.0
 pytest-vcr==1.0.2
+pytest-xdist==2.5.0
 pyyaml==6.0
 rfc3986[idna2008]==1.5.0
 six==1.16.0

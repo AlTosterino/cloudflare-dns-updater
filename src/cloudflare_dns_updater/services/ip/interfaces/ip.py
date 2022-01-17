@@ -10,5 +10,5 @@ class IPService(Abstract):
         self.API_URL: Final[str] = api_url
 
     @abstractmethod
-    async def get_local_ip(self) -> IP:
+    async def get_device_ip(self) -> IP:
         pass

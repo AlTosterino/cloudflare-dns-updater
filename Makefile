@@ -11,14 +11,14 @@ run:
 	$(PYTHON_EXEC) src/cloudflare_dns_updater/main.py
 
 test:
-	pytest
+	pytest -n 5
 
 test-ci:
 	$(PYTHON_EXEC) -m autoflake --check --recursive --ignore-init-module-imports --remove-duplicate-keys --remove-unused-variables --remove-all-unused-imports $(LINT_PATHS) > /dev/null 2>&1
 	$(PYTHON_EXEC) -m isort --check-only $(LINT_PATHS)
 	$(PYTHON_EXEC) -m black --check $(LINT_PATHS)
 	$(PYTHON_EXEC) -m mypy $(APP_PATH) --ignore-missing-imports
-	pytest --cov=cloudflare_dns_updater tests/
+	pytest -n auto --cov=cloudflare_dns_updater tests/
 
 lint:
 	$(PYTHON_EXEC) -m autoflake --in-place --recursive --ignore-init-module-imports --remove-duplicate-keys --remove-unused-variables --remove-all-unused-imports $(LINT_PATHS)
