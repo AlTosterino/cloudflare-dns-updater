@@ -18,7 +18,7 @@ test-ci:
 	$(PYTHON_EXEC) -m isort --check-only $(LINT_PATHS)
 	$(PYTHON_EXEC) -m black --check $(LINT_PATHS)
 	$(PYTHON_EXEC) -m mypy $(APP_PATH) --ignore-missing-imports
-	pytest -n auto --cov=cloudflare_dns_updater tests/
+	pytest -n auto --vcr-record=none --cov=cloudflare_dns_updater tests/
 
 lint:
 	$(PYTHON_EXEC) -m autoflake --in-place --recursive --ignore-init-module-imports --remove-duplicate-keys --remove-unused-variables --remove-all-unused-imports $(LINT_PATHS)
