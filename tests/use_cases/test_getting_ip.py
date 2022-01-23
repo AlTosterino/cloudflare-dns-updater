@@ -13,8 +13,6 @@ from cloudflare_dns_updater.use_cases import GettingDeviceIP
 
 @pytest.fixture
 def ip_service_mock_inject() -> None:
-    InjectConfig.bind_config
-
     class IPServiceMock(IPService):
         async def get_device_ip(self) -> IP:
             return IP("0.0.0.0")
@@ -39,7 +37,6 @@ async def test_should_get_device_ip_from_use_case(ip_service_mock_inject):
     assert isinstance(result, IP)
 
 
-@pytest.mark.vcr
 @pytest.mark.asyncio
 async def test_should_raise_if_could_not_get_device_ip(ip_service_mock_inject):
     # Given

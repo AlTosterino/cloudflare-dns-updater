@@ -1,5 +1,7 @@
 import inject
 
+from cloudflare_dns_updater.services.dns.infrastructure.dns import CloudflareService
+from cloudflare_dns_updater.services.dns.interfaces.dns import DNSService
 from cloudflare_dns_updater.services.ip.infrastructure.ip import IpifyService
 from cloudflare_dns_updater.services.ip.interfaces.ip import IPService
 from cloudflare_dns_updater.settings import Settings
@@ -12,6 +14,7 @@ class InjectConfig:
         settings_inject = cls.settings_inject()
         binder.bind(Settings, settings_inject)
         binder.bind(IPService, cls.ip_service(settings=settings_inject))
+        binder.bind(DNSService, cls.dns_service(settings=settings_inject))
 
     @classmethod
     def settings_inject(cls) -> Settings:
@@ -20,6 +23,10 @@ class InjectConfig:
     @classmethod
     def ip_service(cls, settings: Settings) -> IPService:
         return IpifyService(api_url=settings.IP_API_URL)
+
+    @classmethod
+    def dns_service(cls, settings: Settings) -> DNSService:
+        return CloudflareService(api_url=settings.CLOUDFLARE_API_TOKEN)
 
 
 def build_inject() -> None:

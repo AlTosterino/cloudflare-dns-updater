@@ -1,0 +1,2 @@
+class ZoneID(str):
+    pass
