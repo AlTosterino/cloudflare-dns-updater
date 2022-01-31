@@ -5,10 +5,10 @@ import inject
 import pytest
 
 from cloudflare_dns_updater.injection import InjectConfig
+from cloudflare_dns_updater.queries import DeviceIPQuery
 from cloudflare_dns_updater.services.ip.interfaces.ip import IPService
 from cloudflare_dns_updater.services.ip.value_objects import IP
 from cloudflare_dns_updater.settings import Settings
-from cloudflare_dns_updater.use_cases import GettingDeviceIP
 
 
 @pytest.fixture
@@ -28,9 +28,9 @@ def ip_service_mock_inject() -> None:
 
 
 @pytest.mark.asyncio
-async def test_should_get_device_ip_from_use_case(ip_service_mock_inject):
+async def test_should_get_device_ip(ip_service_mock_inject):
     # When
-    result = await GettingDeviceIP.execute()
+    result = await DeviceIPQuery.execute()
 
     # Then
     assert result == "0.0.0.0"
@@ -47,4 +47,4 @@ async def test_should_raise_if_could_not_get_device_ip(ip_service_mock_inject):
     # Then
     with pytest.raises(httpx.HTTPStatusError):
         # When
-        await GettingDeviceIP.execute()
+        await DeviceIPQuery.execute()

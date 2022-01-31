@@ -8,11 +8,11 @@ from cloudflare_dns_updater.services.dns.infrastructure.serializers.zone import 
 )
 from cloudflare_dns_updater.services.dns.interfaces.dns import DNSService
 from cloudflare_dns_updater.services.dns.value_objects import ZoneID
-from cloudflare_dns_updater.services.dns.value_objects.record import Records
+from cloudflare_dns_updater.services.dns.value_objects.record import DNSRecords
 
 
 class CloudflareService(DNSService):
-    async def get_dns_records(self, zone_id: ZoneID) -> Records:
+    async def get_dns_records(self, zone_id: ZoneID) -> DNSRecords:
         resource_path = f"zones/{zone_id}/dns_records"
         api_url_path = await self.__make_api_url(path=resource_path)
         query_params = {"type": "A"}
@@ -23,7 +23,7 @@ class CloudflareService(DNSService):
         return schema.to_value_object()
 
     async def __make_authentication_header(self) -> dict:
-        return {"Authorization": f"Bearer {self.API_URL}"}
+        return {"Authorization": f"Bearer {self.API_TOKEN}"}
 
     async def __make_request(
         self,
@@ -45,5 +45,6 @@ class CloudflareService(DNSService):
         logger.debug("Got response: {}", result_as_json)
         return result_as_json
 
-    async def __make_api_url(self, path: str) -> str:
+    @staticmethod
+    async def __make_api_url(path: str) -> str:
         return f"https://api.cloudflare.com/client/v4/{path}"

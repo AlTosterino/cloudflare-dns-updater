@@ -26,7 +26,7 @@ class InjectConfig:
 
     @classmethod
     def dns_service(cls, settings: Settings) -> DNSService:
-        return CloudflareService(api_url=settings.CLOUDFLARE_API_TOKEN)
+        return CloudflareService(api_token=settings.CLOUDFLARE_API_TOKEN)
 
 
 def build_inject() -> None:
