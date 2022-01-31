@@ -1,7 +1,7 @@
 language: python
 
 env:
-  - IP_API_URL=https://api64.ipify.org?format=json
+  - IP_API_URL=https://api64.ipify.org?format=json CLOUDFLARE_TOKEN=TEST
 
 python:
   - "3.8"
