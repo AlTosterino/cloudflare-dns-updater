@@ -1,0 +1,90 @@
+interactions:
+- request:
+    body: '{"content": "142.250.203.206", "name": "bitwarden.altosterino.com", "proxied":
+      true, "ttl": 1, "type": "A"}'
+    headers:
+      authorization:
+      - DUMMY
+      content-length:
+      - '107'
+      content-type:
+      - application/json
+      host:
+      - api.cloudflare.com
+    method: PUT
+    uri: https://api.cloudflare.com/client/v4/zones/457aba5ea6227a7f4d672e8845a2d5e9/dns_records/16979338358f4a70eb95395dd3650503
+  response:
+    content: '{"result":{"id":"16979338358f4a70eb95395dd3650503","zone_id":"457aba5ea6227a7f4d672e8845a2d5e9","zone_name":"altosterino.com","name":"bitwarden.altosterino.com","type":"A","content":"142.250.203.206","proxiable":true,"proxied":true,"ttl":1,"locked":false,"meta":{"auto_added":false,"managed_by_apps":false,"managed_by_argo_tunnel":false,"source":"primary"},"created_on":"2022-01-06T21:59:40.261728Z","modified_on":"2022-02-01T21:29:44.829678Z"},"success":true,"errors":[],"messages":[]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 6d6e46e0dd76ffc8-WAW
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 01 Feb 2022 21:29:44 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cflb=0H28vgHxwvgAQtjUGU56Rb8iNWZVUvXht5yx8GZFakM; SameSite=Lax; path=/;
+        expires=Tue, 01-Feb-22 23:59:45 GMT; HttpOnly
+      - __cfruid=a57ac5574136a747d4cf9d800e27f9fe6717a3fb-1643750984; path=/; domain=.api.cloudflare.com;
+        HttpOnly; Secure; SameSite=None
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '33'
+    http_version: HTTP/1.1
+    status_code: 200
+- request:
+    body: '{"content": "142.250.203.206", "name": "portainer.altosterino.com", "proxied":
+      true, "ttl": 1, "type": "A"}'
+    headers:
+      authorization:
+      - DUMMY
+      content-length:
+      - '107'
+      content-type:
+      - application/json
+      host:
+      - api.cloudflare.com
+    method: PUT
+    uri: https://api.cloudflare.com/client/v4/zones/457aba5ea6227a7f4d672e8845a2d5e9/dns_records/17ba2313616ca4ec9be83de9b934790b
+  response:
+    content: '{"result":{"id":"17ba2313616ca4ec9be83de9b934790b","zone_id":"457aba5ea6227a7f4d672e8845a2d5e9","zone_name":"altosterino.com","name":"portainer.altosterino.com","type":"A","content":"142.250.203.206","proxiable":true,"proxied":true,"ttl":1,"locked":false,"meta":{"auto_added":false,"managed_by_apps":false,"managed_by_argo_tunnel":false},"created_on":"2022-01-06T22:08:12.31788Z","modified_on":"2022-02-01T21:25:13.363978Z"},"success":true,"errors":[],"messages":[]}'
+    headers:
+      CF-Cache-Status:
+      - DYNAMIC
+      CF-Ray:
+      - 6d6e46e0da981673-WAW
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 01 Feb 2022 21:29:45 GMT
+      Expect-CT:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      Server:
+      - cloudflare
+      Set-Cookie:
+      - __cflb=0H28vgHxwvgAQtjUGU56Rb8iNWZVUvXht5yx8GZFakM; SameSite=Lax; path=/;
+        expires=Tue, 01-Feb-22 23:59:46 GMT; HttpOnly
+      - __cfruid=fed5aa4efe110e6475053ced8e45ab96ca6ac5ba-1643750985; path=/; domain=.api.cloudflare.com;
+        HttpOnly; Secure; SameSite=None
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      x-envoy-upstream-service-time:
+      - '27'
+    http_version: HTTP/1.1
+    status_code: 200
+version: 1

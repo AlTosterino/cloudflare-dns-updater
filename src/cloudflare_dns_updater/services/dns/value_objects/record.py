@@ -5,11 +5,18 @@ from uuid import UUID
 
 import attr
 
+from cloudflare_dns_updater.services.dns.constants import ZoneType
+
+from .zone import ZoneID
+
 
 @attr.s(frozen=True, auto_attribs=True)
 class DNSSingleRecord:
+    content: str
     id: UUID
     name: str
+    type: ZoneType
+    zone_id: ZoneID
 
 
 class DNSRecords(List[DNSSingleRecord]):

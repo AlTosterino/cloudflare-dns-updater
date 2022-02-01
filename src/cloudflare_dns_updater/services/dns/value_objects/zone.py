@@ -1,2 +1,5 @@
-class ZoneID(str):
+from uuid import UUID
+
+
+class ZoneID(UUID):
     pass
