@@ -1,3 +1,5 @@
+from typing import Final
+
 import httpx
 from loguru import logger
 
@@ -9,6 +11,8 @@ from cloudflare_dns_updater.services.ip.value_objects import IP
 
 
 class IpifyService(IPService):
+    API_URL: Final[str] = "https://api64.ipify.org?format=json"
+
     async def get_device_ip(self) -> IP:
         logger.debug("Getting local IP using {}", self.API_URL)
         async with httpx.AsyncClient() as client:

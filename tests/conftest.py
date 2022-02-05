@@ -1,10 +1,16 @@
 import inject
 import pytest
 
-from cloudflare_dns_updater.injection import InjectConfig
+from cloudflare_dns_updater.injection import build_inject
+from cloudflare_dns_updater.settings import Settings
+
+
+@pytest.fixture(scope="session")
+def settings() -> Settings:
+    return Settings()
 
 
 @pytest.fixture(autouse=True, scope="session")
-def injector() -> inject.Injector:
-    yield inject.clear_and_configure(config=InjectConfig.bind_config)
+def injector(settings) -> inject.Injector:
+    yield build_inject(settings=settings)
     inject.clear()

@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 import inject
 
 from cloudflare_dns_updater.services.dns.infrastructure.dns import CloudflareService
@@ -7,27 +9,25 @@ from cloudflare_dns_updater.services.ip.interfaces.ip import IPService
 from cloudflare_dns_updater.settings import Settings
 
 
+@dataclass(frozen=True)
 class InjectConfig:
-    @classmethod
-    def bind_config(cls, binder: inject.Binder) -> None:
+    settings: Settings
+
+    def bind_config(self, binder: inject.Binder) -> None:
         # ? Use __call__ instead of bind_config?
-        settings_inject = cls.settings_inject()
-        binder.bind(Settings, settings_inject)
-        binder.bind(IPService, cls.ip_service(settings=settings_inject))
-        binder.bind(DNSService, cls.dns_service(settings=settings_inject))
+        binder.bind(Settings, self.settings)
+        binder.bind(IPService, self.ip_service)
+        binder.bind(DNSService, self.dns_service)
 
-    @classmethod
-    def settings_inject(cls) -> Settings:
-        return Settings()
+    @property
+    def ip_service(self) -> IPService:
+        return IpifyService()
 
-    @classmethod
-    def ip_service(cls, settings: Settings) -> IPService:
-        return IpifyService(api_url=settings.IP_API_URL)
-
-    @classmethod
-    def dns_service(cls, settings: Settings) -> DNSService:
-        return CloudflareService(api_token=settings.CLOUDFLARE_API_TOKEN)
+    @property
+    def dns_service(self) -> DNSService:
+        return CloudflareService(api_token=self.settings.CLOUDFLARE_API_TOKEN)
 
 
-def build_inject() -> None:
-    inject.clear_and_configure(config=InjectConfig.bind_config)
+def build_inject(settings: Settings) -> None:
+    config = InjectConfig(settings=settings)
+    inject.clear_and_configure(config=config.bind_config)

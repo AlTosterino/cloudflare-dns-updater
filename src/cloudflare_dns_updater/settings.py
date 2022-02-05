@@ -1,15 +1,33 @@
 import os
+import sys
 from dataclasses import dataclass
+
+from loguru import logger
 
 
 @dataclass(frozen=True)
 class Settings:
-    LIBRARY_NAME: str = "cloudflare_dns_updater"
-    IP_API_URL: str = os.environ["IP_API_URL"]
     CLOUDFLARE_API_TOKEN: str = os.environ["CLOUDFLARE_TOKEN"]
+    DEBUG: bool = False
 
-    @classmethod
-    def disable_logging(cls) -> None:
-        from loguru import logger
+    def __post_init__(self) -> None:
+        self.__set_logging()
+        if self.DEBUG:
+            self.__set_debug_logging()
 
-        logger.disable(cls.LIBRARY_NAME)
+    def __set_logging(self) -> None:
+        logger.remove()
+        log_format = "{time:HH:mm:ss} | {message}"
+        logger.add(
+            sys.stderr, format=log_format, filter="cloudflare_dns_updater", level="INFO"
+        )
+
+    def __set_debug_logging(self) -> None:
+        logger.remove()
+        log_format = "{level} | {time:HH:mm:ss} | {name} {message}"
+        logger.add(
+            sys.stderr,
+            format=log_format,
+            filter="cloudflare_dns_updater",
+            level="DEBUG",
+        )

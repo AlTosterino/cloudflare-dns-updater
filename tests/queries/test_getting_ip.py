@@ -8,23 +8,24 @@ from cloudflare_dns_updater.injection import InjectConfig
 from cloudflare_dns_updater.queries import DeviceIPQuery
 from cloudflare_dns_updater.services.ip.interfaces.ip import IPService
 from cloudflare_dns_updater.services.ip.value_objects import IP
-from cloudflare_dns_updater.settings import Settings
 
 
 @pytest.fixture
-def ip_service_mock_inject() -> None:
+def ip_service_mock_inject(settings, injector) -> None:
     class IPServiceMock(IPService):
         async def get_device_ip(self) -> IP:
             return IP("0.0.0.0")
 
     class MockInjectConfig(InjectConfig):
-        @classmethod
-        def ip_service(cls, settings: Settings) -> IPService:
-            return IPServiceMock(api_url="")
+        @property
+        def ip_service(self) -> IPService:
+            return IPServiceMock()
 
-    inject.clear_and_configure(config=MockInjectConfig.bind_config)
+    config = MockInjectConfig(settings=settings)
+    inject.clear_and_configure(config=config.bind_config)
     yield
-    inject.clear_and_configure(config=InjectConfig.bind_config)
+    config = InjectConfig(settings=settings)
+    inject.clear_and_configure(config=config.bind_config)
 
 
 @pytest.mark.asyncio

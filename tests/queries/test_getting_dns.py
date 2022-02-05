@@ -16,7 +16,6 @@ from cloudflare_dns_updater.services.dns.value_objects import (
     DNSSingleRecord,
     ZoneID,
 )
-from cloudflare_dns_updater.settings import Settings
 
 TEST_UUID = ZoneID(uuid.uuid4().hex)
 TEST_DNS_RECORD = DNSSingleRecord(
@@ -29,7 +28,7 @@ TEST_DNS_RECORD = DNSSingleRecord(
 
 
 @pytest.fixture
-def dns_service_mock_inject() -> None:
+def dns_service_mock_inject(settings) -> None:
     class DNSServiceMock(DNSService):
         async def get_dns_records(self, zone_id: ZoneID) -> DNSRecords:
             return DNSRecords([TEST_DNS_RECORD])
@@ -40,13 +39,15 @@ def dns_service_mock_inject() -> None:
             return DNSRecords([TEST_DNS_RECORD])
 
     class MockInjectConfig(InjectConfig):
-        @classmethod
-        def dns_service(cls, settings: Settings) -> DNSService:
+        @property
+        def dns_service(self) -> DNSService:
             return DNSServiceMock(api_token="TEST_TOKEN")
 
-    inject.clear_and_configure(config=MockInjectConfig.bind_config)
+    config = MockInjectConfig(settings=settings)
+    inject.clear_and_configure(config=config.bind_config)
     yield
-    inject.clear_and_configure(config=InjectConfig.bind_config)
+    config = InjectConfig(settings=settings)
+    inject.clear_and_configure(config=config.bind_config)
 
 
 @pytest.mark.asyncio

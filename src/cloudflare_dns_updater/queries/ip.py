@@ -12,6 +12,8 @@ class DeviceIPQuery:
 
     @classmethod
     async def execute(cls) -> IP:
+        logger.info("Getting device IP")
         logger.debug("Getting device IP using: {}", type(cls.IP_SERVICE).__name__)
         device_ip: IP = await cls.IP_SERVICE.get_device_ip()
+        logger.info("Got device IP: {}", device_ip)
         return device_ip
