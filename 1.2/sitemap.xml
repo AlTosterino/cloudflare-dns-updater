@@ -5,9 +5,4 @@
          <lastmod>2022-02-08</lastmod>
          <changefreq>daily</changefreq>
     </url>
-    <url>
-         <loc>https://example.com/1.2/another_page/</loc>
-         <lastmod>2022-02-08</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
 </urlset>
