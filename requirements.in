@@ -1,10 +1,15 @@
-autoflake
 attrs
+autoflake
 black
 httpx
 inject
 isort
 loguru
+mike
+mkdocs
+mkdocs-git-revision-date-plugin
+mkdocs-material
+mkdocs-minify-plugin
 mypy
 pydantic
 pytest
