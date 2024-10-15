@@ -8,7 +8,7 @@ $(APP_PATH) \
 tests \
 
 run:
-	$(PYTHON_EXEC) src/cloudflare_dns_updater/main.py
+	cloudflare_dns_updater
 
 test:
 	pytest -n 5

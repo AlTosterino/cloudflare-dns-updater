@@ -60,7 +60,7 @@ async def test_should_get_dns_records():
     ]
 
     # When
-    result = await dns_service.get_dns_records(zone_id=zone_id)
+    result = await dns_service.get_dns_records(zone_id=zone_id, skip=[])
 
     # Then
     assert result == expected

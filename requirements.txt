@@ -69,6 +69,5 @@ vcrpy==4.1.1
 verspec==0.1.0
 watchdog==2.1.6
 win32-setctime==1.1.0
-wrapt==1.13.3
-yarl==1.7.2
+wrapt==1.14.0
 zipp==3.7.0

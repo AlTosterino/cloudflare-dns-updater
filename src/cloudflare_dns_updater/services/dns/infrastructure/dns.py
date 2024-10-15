@@ -1,5 +1,5 @@
 import asyncio
-from typing import Collection, Optional
+from typing import Collection, List, Optional
 
 import attr
 import httpx
@@ -18,7 +18,7 @@ from cloudflare_dns_updater.services.dns.value_objects.record import DNSRecords
 
 
 class CloudflareService(DNSService):
-    async def get_dns_records(self, zone_id: ZoneID) -> DNSRecords:
+    async def get_dns_records(self, zone_id: ZoneID, skip: List[str]) -> DNSRecords:
         resource_path = f"zones/{zone_id.hex}/dns_records"
         api_url_path = await self.__make_api_url(path=resource_path)
         query_params = {"type": "A"}
@@ -26,7 +26,7 @@ class CloudflareService(DNSService):
             method="GET", url=api_url_path, query_params=query_params
         )
         schema = RecordsSerializer.parse_obj(request_result["result"])
-        return schema.to_value_object()
+        return schema.to_value_object(skip=skip)
 
     async def update_dns_records(
         self, dtos: Collection[UpdateDNSRecordDto]

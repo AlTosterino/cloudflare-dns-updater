@@ -1,5 +1,5 @@
 import uuid
-from typing import Collection
+from typing import Collection, List
 from unittest.mock import Mock
 
 import httpx
@@ -30,8 +30,9 @@ TEST_DNS_RECORD = DNSSingleRecord(
 @pytest.fixture
 def dns_service_mock_inject(settings) -> None:
     class DNSServiceMock(DNSService):
-        async def get_dns_records(self, zone_id: ZoneID) -> DNSRecords:
-            return DNSRecords([TEST_DNS_RECORD])
+        async def get_dns_records(self, zone_id: ZoneID, skip: List[str]) -> DNSRecords:
+            records = [TEST_DNS_RECORD]
+            return DNSRecords([record for record in records if record.name not in skip])
 
         async def update_dns_records(
             self, dtos: Collection[UpdateDNSRecordDto]
@@ -63,7 +64,7 @@ async def test_should_get_dns_records(dns_service_mock_inject):
         )
     ]
     # When
-    result = await DNSRecordsQuery.execute(zone_id=TEST_UUID)
+    result = await DNSRecordsQuery.execute(zone_id=TEST_UUID, skip=[])
 
     # Then
     assert result == expected
@@ -81,4 +82,13 @@ async def test_should_raise_if_could_not_get_dns_records(dns_service_mock_inject
     # Then
     with pytest.raises(httpx.HTTPStatusError):
         # When
-        await DNSRecordsQuery.execute(zone_id=TEST_UUID)
+        await DNSRecordsQuery.execute(zone_id=TEST_UUID, skip=[])
+
+
+@pytest.mark.asyncio
+async def test_should_skip_dns_records(dns_service_mock_inject):
+    # When
+    result = await DNSRecordsQuery.execute(zone_id=TEST_UUID, skip=["test.com"])
+
+    # Then
+    assert not result

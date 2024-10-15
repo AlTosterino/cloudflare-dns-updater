@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from uuid import UUID
 
 from pydantic import BaseModel
@@ -33,8 +33,11 @@ class SingleRecordSerializer(BaseModel):
 class RecordsSerializer(BaseModel):
     __root__: List[SingleRecordSerializer]
 
-    def to_value_object(self) -> DNSRecords:
+    def to_value_object(self, skip: Union[List[str], None] = None) -> DNSRecords:
+        names_to_skip = skip if skip else []
         parsed_records = [
-            DNSSingleRecord(**parsed_record.dict()) for parsed_record in self.__root__
+            DNSSingleRecord(**parsed_record.dict())
+            for parsed_record in self.__root__
+            if parsed_record.name not in names_to_skip
         ]
         return DNSRecords(parsed_records)
