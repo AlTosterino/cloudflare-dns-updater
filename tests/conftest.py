@@ -7,7 +7,7 @@ from cloudflare_dns_updater.settings import Settings
 
 @pytest.fixture(scope="session")
 def settings() -> Settings:
-    return Settings()
+    return Settings(CLOUDFLARE_API_TOKEN="TEST")
 
 
 @pytest.fixture(autouse=True, scope="session")
