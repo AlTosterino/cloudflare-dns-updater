@@ -1,11 +1,11 @@
 import inject
 import pytest
 
-from cloudflare_dns_updater.settings import Settings
-
 
 @pytest.fixture(scope="session")
-def settings() -> Settings:
+def settings() -> "Settings":
+    from cloudflare_dns_updater.settings import Settings
+
     return Settings(CLOUDFLARE_API_TOKEN="TEST")
 
 
