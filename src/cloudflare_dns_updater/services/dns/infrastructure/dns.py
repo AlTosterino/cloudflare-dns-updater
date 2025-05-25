@@ -22,10 +22,14 @@ class CloudflareService(DNSService):
         resource_path = f"zones/{zone_id.hex}/dns_records"
         api_url_path = await self.__make_api_url(path=resource_path)
         query_params = {"type": "A"}
-        request_result = await self.__make_request(
+        response = await self.__make_request(
             method="GET", url=api_url_path, query_params=query_params
         )
-        schema = RecordsSerializer.parse_obj(request_result["result"])
+        results = response["result"]
+        # Manually add zone_id to each record as it is not included in the API response for some reason
+        for item in results:
+            item["zone_id"] = zone_id
+        schema = RecordsSerializer.parse_obj(results)
         return schema.to_value_object(skip=skip)
 
     async def update_dns_records(
@@ -41,10 +45,14 @@ class CloudflareService(DNSService):
             requests.append(request)
         async with httpx.AsyncClient() as client:
             callable_requests = [client.send(request) for request in requests]
-            results = await asyncio.gather(*callable_requests)
-        schema = RecordsSerializer.parse_obj(
-            [result.json()["result"] for result in results]
-        )
+            responses = await asyncio.gather(*callable_requests)
+        # Manually add zone_id to each record as it is not included in the API response for some reason
+        results = []
+        for response, dto in zip(responses, dtos):
+            result = response.json()["result"]
+            result["zone_id"] = dto.zone_id
+            results.append(result)
+        schema = RecordsSerializer.parse_obj(results)
         return schema.to_value_object()
 
     async def __make_authentication_header(self) -> dict:
