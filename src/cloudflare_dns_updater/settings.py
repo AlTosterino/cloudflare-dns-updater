@@ -1,13 +1,13 @@
 import os
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from loguru import logger
 
 
 @dataclass(frozen=True)
 class Settings:
-    CLOUDFLARE_API_TOKEN: str = os.environ["CLOUDFLARE_TOKEN"]
+    CLOUDFLARE_API_TOKEN: str = field(default_factory=lambda: os.environ.get("CLOUDFLARE_API_TOKEN"))
     DEBUG: bool = False
 
     def __post_init__(self) -> None:
