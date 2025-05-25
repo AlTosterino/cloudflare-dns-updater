@@ -28,14 +28,5 @@ jobs:
       - name: Sync dependencies
         run: make sync-deps
 
-      - name: Install codecov
-        run: pip install codecov
-
       - name: Run tests
         run: make test-ci
-
-      - name: Upload coverage to Codecov
-        if: github.ref == 'refs/heads/main' && success()
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-        run: codecov -t $CODECOV_TOKEN
