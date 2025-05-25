@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    # Run on all branches for push
+    branches:
+      - '**'   # all branches
+  pull_request:
+    # Run on all PRs regardless of target branch
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.8"
+
+      - name: Install pip-tools
+        run: pip install -U pip pip-tools
+
+      - name: Sync dependencies
+        run: make sync-deps
+
+      - name: Install codecov
+        run: pip install codecov
+
+      - name: Run tests
+        run: make test-ci
+
+      - name: Upload coverage to Codecov
+        if: github.ref == 'refs/heads/main' && success()
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+        run: codecov -t $CODECOV_TOKEN
